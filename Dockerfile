@@ -4,7 +4,9 @@
 FROM python:3.8-bullseye as builder
 
 RUN apt-get -y update && \
-    apt-get install -y --no-install-recommends mecab libmecab-dev sudo
+    apt-get install -y --no-install-recommends mecab libmecab-dev sudo && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 WORKDIR /opt
 RUN git clone https://github.com/neologd/mecab-unidic-neologd.git && \
