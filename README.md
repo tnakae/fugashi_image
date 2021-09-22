@@ -17,3 +17,9 @@
   - Dockerfile では、マルチステージビルドを実施する。
     - 途中段階でのイメージは大きくなってしまうが、
       最終的に実行に用いるイメージは必要最小限となる。
+
+## 利用方法
+``` bash
+$ docker-compose build
+$ docker-compose up
+```
