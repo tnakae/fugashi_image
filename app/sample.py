@@ -23,11 +23,12 @@ def run_parser(use_neologd: bool, text: str = SAMPLE_TEXT) -> None:
         pos = (node.feature.pos1, node.feature.pos2)
         if (node.feature.pos1 == "名詞" and
             node.feature.pos2 in ("普通名詞", "固有名詞") and
-            node.feature.orthBase not in ['こと', 'ため', 'よう', 'うえ',] and
+            node.feature.orthBase not in ['こと', 'ため', 'よう', 'うえ'] and
             node.feature.orthBase is not None):
             results.append(node.feature.orthBase)
 
     print("/".join(results))
+
 
 def main() -> None:
     print(f"元テキスト :\n-----\n{SAMPLE_TEXT}\n-----")
@@ -35,7 +36,6 @@ def main() -> None:
         neologd_str = "使う" if use_neologd else "使わない"
         print(f"neologd を{neologd_str}場合")
         run_parser(use_neologd)
-
 
 
 if __name__ == "__main__":
