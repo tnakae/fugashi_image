@@ -4,7 +4,7 @@
 
 # builder には slim ではない debian を使う
 # ビルドに必要な gcc / cmake などが含まれている
-# 現時点で最新の debian である bullseye を利用
+# 現時点で最新の stable debian である bullseye がベースのイメージを利用
 FROM python:3.8-bullseye as builder
 
 # mecab-unidic-neologd のビルドに必要なパッケージをインストール
@@ -19,8 +19,8 @@ WORKDIR /opt
 RUN git clone https://github.com/neologd/mecab-unidic-neologd.git && \
     cd mecab-unidic-neologd && \
     git checkout 22895c054014393307967eddcd351c69e1fd57af && \
+    ./bin/install-mecab-unidic-neologd -n -y && \
     cd .. && \
-    ./mecab-unidic-neologd/bin/install-mecab-unidic-neologd -n -y && \
     rm -rf mecab-unidic-neologd
 
 ##########################################################
@@ -28,7 +28,7 @@ RUN git clone https://github.com/neologd/mecab-unidic-neologd.git && \
 ##########################################################
 
 # runner には、実行に必要最小限の slim のイメージを用いる
-# 現時点で最新の debian である bullseye を利用
+# 現時点で最新の stable debian である bullseye がベースのイメージを利用
 FROM python:3.8-slim-bullseye as runner
 
 # builderからneologd辞書をコピーする。
